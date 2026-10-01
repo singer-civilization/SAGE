@@ -1,0 +1,1231 @@
+[
+  {
+    "path_id": "path_single_part",
+    "path_name": "part 单表路径",
+    "allowed_tables": [
+      "part"
+    ],
+    "allowed_join_paths": [],
+    "primary_tables": [
+      "part"
+    ],
+    "secondary_tables": [],
+    "from_mode": "single",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "part.p_partkey",
+      "part.p_name",
+      "part.p_mfgr",
+      "part.p_brand"
+    ],
+    "preferred_group_columns": [
+      "part.p_name",
+      "part.p_mfgr",
+      "part.p_brand"
+    ],
+    "preferred_order_columns": [
+      "part.p_partkey",
+      "part.p_name",
+      "part.p_mfgr"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于单表生成，适合先稳定产出带过滤和排序的 seed。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_join_partsupp_supplier",
+    "path_name": "partsupp -> supplier",
+    "allowed_tables": [
+      "partsupp",
+      "supplier"
+    ],
+    "allowed_join_paths": [
+      [
+        "partsupp",
+        "supplier"
+      ]
+    ],
+    "primary_tables": [
+      "partsupp"
+    ],
+    "secondary_tables": [
+      "supplier"
+    ],
+    "from_mode": "join",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "partsupp.ps_partkey",
+      "partsupp.ps_suppkey",
+      "partsupp.ps_availqty",
+      "partsupp.ps_supplycost"
+    ],
+    "preferred_group_columns": [
+      "partsupp.ps_comment"
+    ],
+    "preferred_order_columns": [
+      "partsupp.ps_partkey",
+      "partsupp.ps_suppkey",
+      "partsupp.ps_availqty"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于外键链路生成，优先沿自然 join 路径构造 workload。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_join_nation_supplier_partsupp",
+    "path_name": "nation -> supplier -> partsupp",
+    "allowed_tables": [
+      "nation",
+      "supplier",
+      "partsupp"
+    ],
+    "allowed_join_paths": [
+      [
+        "nation",
+        "supplier"
+      ],
+      [
+        "partsupp",
+        "supplier"
+      ]
+    ],
+    "primary_tables": [
+      "nation"
+    ],
+    "secondary_tables": [
+      "supplier",
+      "partsupp"
+    ],
+    "from_mode": "join",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "nation.n_nationkey",
+      "nation.n_name",
+      "nation.n_regionkey",
+      "nation.n_comment"
+    ],
+    "preferred_group_columns": [
+      "nation.n_name",
+      "nation.n_comment"
+    ],
+    "preferred_order_columns": [
+      "nation.n_nationkey",
+      "nation.n_name",
+      "nation.n_regionkey"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于外键链路生成，优先沿自然 join 路径构造 workload。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_single_orders",
+    "path_name": "orders 单表路径",
+    "allowed_tables": [
+      "orders"
+    ],
+    "allowed_join_paths": [],
+    "primary_tables": [
+      "orders"
+    ],
+    "secondary_tables": [],
+    "from_mode": "single",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "orders.o_orderkey",
+      "orders.o_custkey",
+      "orders.o_orderstatus",
+      "orders.o_totalprice"
+    ],
+    "preferred_group_columns": [
+      "orders.o_orderstatus",
+      "orders.o_orderdate",
+      "orders.o_orderpriority"
+    ],
+    "preferred_order_columns": [
+      "orders.o_orderkey",
+      "orders.o_custkey",
+      "orders.o_orderstatus"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于单表生成，适合先稳定产出带过滤和排序的 seed。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_join_customer_orders",
+    "path_name": "customer -> orders",
+    "allowed_tables": [
+      "customer",
+      "orders"
+    ],
+    "allowed_join_paths": [
+      [
+        "customer",
+        "orders"
+      ]
+    ],
+    "primary_tables": [
+      "customer"
+    ],
+    "secondary_tables": [
+      "orders"
+    ],
+    "from_mode": "join",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "customer.c_custkey",
+      "customer.c_name",
+      "customer.c_address",
+      "customer.c_nationkey"
+    ],
+    "preferred_group_columns": [
+      "customer.c_name",
+      "customer.c_address",
+      "customer.c_phone"
+    ],
+    "preferred_order_columns": [
+      "customer.c_custkey",
+      "customer.c_name",
+      "customer.c_address"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于外键链路生成，优先沿自然 join 路径构造 workload。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_join_region_nation_customer",
+    "path_name": "region -> nation -> customer",
+    "allowed_tables": [
+      "region",
+      "nation",
+      "customer"
+    ],
+    "allowed_join_paths": [
+      [
+        "customer",
+        "nation"
+      ],
+      [
+        "nation",
+        "region"
+      ]
+    ],
+    "primary_tables": [
+      "region"
+    ],
+    "secondary_tables": [
+      "nation",
+      "customer"
+    ],
+    "from_mode": "join",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "region.r_regionkey",
+      "region.r_name",
+      "region.r_comment"
+    ],
+    "preferred_group_columns": [
+      "region.r_name",
+      "region.r_comment"
+    ],
+    "preferred_order_columns": [
+      "region.r_regionkey",
+      "region.r_name",
+      "region.r_comment"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于外键链路生成，优先沿自然 join 路径构造 workload。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_single_supplier",
+    "path_name": "supplier 单表路径",
+    "allowed_tables": [
+      "supplier"
+    ],
+    "allowed_join_paths": [],
+    "primary_tables": [
+      "supplier"
+    ],
+    "secondary_tables": [],
+    "from_mode": "single",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "supplier.s_suppkey",
+      "supplier.s_name",
+      "supplier.s_address",
+      "supplier.s_nationkey"
+    ],
+    "preferred_group_columns": [
+      "supplier.s_name",
+      "supplier.s_address",
+      "supplier.s_phone"
+    ],
+    "preferred_order_columns": [
+      "supplier.s_suppkey",
+      "supplier.s_name",
+      "supplier.s_address"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于单表生成，适合先稳定产出带过滤和排序的 seed。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_join_part_partsupp",
+    "path_name": "part -> partsupp",
+    "allowed_tables": [
+      "part",
+      "partsupp"
+    ],
+    "allowed_join_paths": [
+      [
+        "part",
+        "partsupp"
+      ]
+    ],
+    "primary_tables": [
+      "part"
+    ],
+    "secondary_tables": [
+      "partsupp"
+    ],
+    "from_mode": "join",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "part.p_partkey",
+      "part.p_name",
+      "part.p_mfgr",
+      "part.p_brand"
+    ],
+    "preferred_group_columns": [
+      "part.p_name",
+      "part.p_mfgr",
+      "part.p_brand"
+    ],
+    "preferred_order_columns": [
+      "part.p_partkey",
+      "part.p_name",
+      "part.p_mfgr"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于外键链路生成，优先沿自然 join 路径构造 workload。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_join_part_partsupp_supplier",
+    "path_name": "part -> partsupp -> supplier",
+    "allowed_tables": [
+      "part",
+      "partsupp",
+      "supplier"
+    ],
+    "allowed_join_paths": [
+      [
+        "part",
+        "partsupp"
+      ],
+      [
+        "partsupp",
+        "supplier"
+      ]
+    ],
+    "primary_tables": [
+      "part"
+    ],
+    "secondary_tables": [
+      "partsupp",
+      "supplier"
+    ],
+    "from_mode": "join",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "part.p_partkey",
+      "part.p_name",
+      "part.p_mfgr",
+      "part.p_brand"
+    ],
+    "preferred_group_columns": [
+      "part.p_name",
+      "part.p_mfgr",
+      "part.p_brand"
+    ],
+    "preferred_order_columns": [
+      "part.p_partkey",
+      "part.p_name",
+      "part.p_mfgr"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于外键链路生成，优先沿自然 join 路径构造 workload。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_single_partsupp",
+    "path_name": "partsupp 单表路径",
+    "allowed_tables": [
+      "partsupp"
+    ],
+    "allowed_join_paths": [],
+    "primary_tables": [
+      "partsupp"
+    ],
+    "secondary_tables": [],
+    "from_mode": "single",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "partsupp.ps_partkey",
+      "partsupp.ps_suppkey",
+      "partsupp.ps_availqty",
+      "partsupp.ps_supplycost"
+    ],
+    "preferred_group_columns": [
+      "partsupp.ps_comment"
+    ],
+    "preferred_order_columns": [
+      "partsupp.ps_partkey",
+      "partsupp.ps_suppkey",
+      "partsupp.ps_availqty"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于单表生成，适合先稳定产出带过滤和排序的 seed。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_join_customer_nation",
+    "path_name": "customer -> nation",
+    "allowed_tables": [
+      "customer",
+      "nation"
+    ],
+    "allowed_join_paths": [
+      [
+        "customer",
+        "nation"
+      ]
+    ],
+    "primary_tables": [
+      "customer"
+    ],
+    "secondary_tables": [
+      "nation"
+    ],
+    "from_mode": "join",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "customer.c_custkey",
+      "customer.c_name",
+      "customer.c_address",
+      "customer.c_nationkey"
+    ],
+    "preferred_group_columns": [
+      "customer.c_name",
+      "customer.c_address",
+      "customer.c_phone"
+    ],
+    "preferred_order_columns": [
+      "customer.c_custkey",
+      "customer.c_name",
+      "customer.c_address"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于外键链路生成，优先沿自然 join 路径构造 workload。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_join_nation_customer_orders",
+    "path_name": "nation -> customer -> orders",
+    "allowed_tables": [
+      "nation",
+      "customer",
+      "orders"
+    ],
+    "allowed_join_paths": [
+      [
+        "customer",
+        "nation"
+      ],
+      [
+        "customer",
+        "orders"
+      ]
+    ],
+    "primary_tables": [
+      "nation"
+    ],
+    "secondary_tables": [
+      "customer",
+      "orders"
+    ],
+    "from_mode": "join",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "nation.n_nationkey",
+      "nation.n_name",
+      "nation.n_regionkey",
+      "nation.n_comment"
+    ],
+    "preferred_group_columns": [
+      "nation.n_name",
+      "nation.n_comment"
+    ],
+    "preferred_order_columns": [
+      "nation.n_nationkey",
+      "nation.n_name",
+      "nation.n_regionkey"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于外键链路生成，优先沿自然 join 路径构造 workload。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_single_customer",
+    "path_name": "customer 单表路径",
+    "allowed_tables": [
+      "customer"
+    ],
+    "allowed_join_paths": [],
+    "primary_tables": [
+      "customer"
+    ],
+    "secondary_tables": [],
+    "from_mode": "single",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "customer.c_custkey",
+      "customer.c_name",
+      "customer.c_address",
+      "customer.c_nationkey"
+    ],
+    "preferred_group_columns": [
+      "customer.c_name",
+      "customer.c_address",
+      "customer.c_phone"
+    ],
+    "preferred_order_columns": [
+      "customer.c_custkey",
+      "customer.c_name",
+      "customer.c_address"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于单表生成，适合先稳定产出带过滤和排序的 seed。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_join_nation_region",
+    "path_name": "nation -> region",
+    "allowed_tables": [
+      "nation",
+      "region"
+    ],
+    "allowed_join_paths": [
+      [
+        "nation",
+        "region"
+      ]
+    ],
+    "primary_tables": [
+      "nation"
+    ],
+    "secondary_tables": [
+      "region"
+    ],
+    "from_mode": "join",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "nation.n_nationkey",
+      "nation.n_name",
+      "nation.n_regionkey",
+      "nation.n_comment"
+    ],
+    "preferred_group_columns": [
+      "nation.n_name",
+      "nation.n_comment"
+    ],
+    "preferred_order_columns": [
+      "nation.n_nationkey",
+      "nation.n_name",
+      "nation.n_regionkey"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于外键链路生成，优先沿自然 join 路径构造 workload。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_join_customer_nation_supplier",
+    "path_name": "customer -> nation -> supplier",
+    "allowed_tables": [
+      "customer",
+      "nation",
+      "supplier"
+    ],
+    "allowed_join_paths": [
+      [
+        "customer",
+        "nation"
+      ],
+      [
+        "nation",
+        "supplier"
+      ]
+    ],
+    "primary_tables": [
+      "customer"
+    ],
+    "secondary_tables": [
+      "nation",
+      "supplier"
+    ],
+    "from_mode": "join",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "customer.c_custkey",
+      "customer.c_name",
+      "customer.c_address",
+      "customer.c_nationkey"
+    ],
+    "preferred_group_columns": [
+      "customer.c_name",
+      "customer.c_address",
+      "customer.c_phone"
+    ],
+    "preferred_order_columns": [
+      "customer.c_custkey",
+      "customer.c_name",
+      "customer.c_address"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于外键链路生成，优先沿自然 join 路径构造 workload。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_single_region",
+    "path_name": "region 单表路径",
+    "allowed_tables": [
+      "region"
+    ],
+    "allowed_join_paths": [],
+    "primary_tables": [
+      "region"
+    ],
+    "secondary_tables": [],
+    "from_mode": "single",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "region.r_regionkey",
+      "region.r_name",
+      "region.r_comment"
+    ],
+    "preferred_group_columns": [
+      "region.r_name",
+      "region.r_comment"
+    ],
+    "preferred_order_columns": [
+      "region.r_regionkey",
+      "region.r_name",
+      "region.r_comment"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于单表生成，适合先稳定产出带过滤和排序的 seed。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_join_nation_supplier",
+    "path_name": "nation -> supplier",
+    "allowed_tables": [
+      "nation",
+      "supplier"
+    ],
+    "allowed_join_paths": [
+      [
+        "nation",
+        "supplier"
+      ]
+    ],
+    "primary_tables": [
+      "nation"
+    ],
+    "secondary_tables": [
+      "supplier"
+    ],
+    "from_mode": "join",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "nation.n_nationkey",
+      "nation.n_name",
+      "nation.n_regionkey",
+      "nation.n_comment"
+    ],
+    "preferred_group_columns": [
+      "nation.n_name",
+      "nation.n_comment"
+    ],
+    "preferred_order_columns": [
+      "nation.n_nationkey",
+      "nation.n_name",
+      "nation.n_regionkey"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于外键链路生成，优先沿自然 join 路径构造 workload。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_join_region_nation_supplier",
+    "path_name": "region -> nation -> supplier",
+    "allowed_tables": [
+      "region",
+      "nation",
+      "supplier"
+    ],
+    "allowed_join_paths": [
+      [
+        "nation",
+        "region"
+      ],
+      [
+        "nation",
+        "supplier"
+      ]
+    ],
+    "primary_tables": [
+      "region"
+    ],
+    "secondary_tables": [
+      "nation",
+      "supplier"
+    ],
+    "from_mode": "join",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "region.r_regionkey",
+      "region.r_name",
+      "region.r_comment"
+    ],
+    "preferred_group_columns": [
+      "region.r_name",
+      "region.r_comment"
+    ],
+    "preferred_order_columns": [
+      "region.r_regionkey",
+      "region.r_name",
+      "region.r_comment"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于外键链路生成，优先沿自然 join 路径构造 workload。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_single_nation",
+    "path_name": "nation 单表路径",
+    "allowed_tables": [
+      "nation"
+    ],
+    "allowed_join_paths": [],
+    "primary_tables": [
+      "nation"
+    ],
+    "secondary_tables": [],
+    "from_mode": "single",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "nation.n_nationkey",
+      "nation.n_name",
+      "nation.n_regionkey",
+      "nation.n_comment"
+    ],
+    "preferred_group_columns": [
+      "nation.n_name",
+      "nation.n_comment"
+    ],
+    "preferred_order_columns": [
+      "nation.n_nationkey",
+      "nation.n_name",
+      "nation.n_regionkey"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于单表生成，适合先稳定产出带过滤和排序的 seed。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_single_lineitem",
+    "path_name": "lineitem 单表路径",
+    "allowed_tables": [
+      "lineitem"
+    ],
+    "allowed_join_paths": [],
+    "primary_tables": [
+      "lineitem"
+    ],
+    "secondary_tables": [],
+    "from_mode": "single",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "lineitem.l_orderkey",
+      "lineitem.l_partkey",
+      "lineitem.l_suppkey",
+      "lineitem.l_linenumber"
+    ],
+    "preferred_group_columns": [
+      "lineitem.l_returnflag",
+      "lineitem.l_linestatus",
+      "lineitem.l_shipdate"
+    ],
+    "preferred_order_columns": [
+      "lineitem.l_orderkey",
+      "lineitem.l_partkey",
+      "lineitem.l_suppkey"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于单表生成，适合先稳定产出带过滤和排序的 seed。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_join_lineitem_partsupp",
+    "path_name": "lineitem -> partsupp",
+    "allowed_tables": [
+      "lineitem",
+      "partsupp"
+    ],
+    "allowed_join_paths": [
+      [
+        "lineitem",
+        "partsupp"
+      ]
+    ],
+    "primary_tables": [
+      "lineitem"
+    ],
+    "secondary_tables": [
+      "partsupp"
+    ],
+    "from_mode": "join",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "lineitem.l_orderkey",
+      "lineitem.l_partkey",
+      "lineitem.l_suppkey",
+      "lineitem.l_linenumber"
+    ],
+    "preferred_group_columns": [
+      "lineitem.l_returnflag",
+      "lineitem.l_linestatus",
+      "lineitem.l_shipdate"
+    ],
+    "preferred_order_columns": [
+      "lineitem.l_orderkey",
+      "lineitem.l_partkey",
+      "lineitem.l_suppkey"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于外键链路生成，优先沿自然 join 路径构造 workload。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_join_customer_orders_lineitem",
+    "path_name": "customer -> orders -> lineitem",
+    "allowed_tables": [
+      "customer",
+      "orders",
+      "lineitem"
+    ],
+    "allowed_join_paths": [
+      [
+        "customer",
+        "orders"
+      ],
+      [
+        "lineitem",
+        "orders"
+      ]
+    ],
+    "primary_tables": [
+      "customer"
+    ],
+    "secondary_tables": [
+      "orders",
+      "lineitem"
+    ],
+    "from_mode": "join",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "customer.c_custkey",
+      "customer.c_name",
+      "customer.c_address",
+      "customer.c_nationkey"
+    ],
+    "preferred_group_columns": [
+      "customer.c_name",
+      "customer.c_address",
+      "customer.c_phone"
+    ],
+    "preferred_order_columns": [
+      "customer.c_custkey",
+      "customer.c_name",
+      "customer.c_address"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于外键链路生成，优先沿自然 join 路径构造 workload。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_join_lineitem_orders",
+    "path_name": "lineitem -> orders",
+    "allowed_tables": [
+      "lineitem",
+      "orders"
+    ],
+    "allowed_join_paths": [
+      [
+        "lineitem",
+        "orders"
+      ]
+    ],
+    "primary_tables": [
+      "lineitem"
+    ],
+    "secondary_tables": [
+      "orders"
+    ],
+    "from_mode": "join",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "lineitem.l_orderkey",
+      "lineitem.l_partkey",
+      "lineitem.l_suppkey",
+      "lineitem.l_linenumber"
+    ],
+    "preferred_group_columns": [
+      "lineitem.l_returnflag",
+      "lineitem.l_linestatus",
+      "lineitem.l_shipdate"
+    ],
+    "preferred_order_columns": [
+      "lineitem.l_orderkey",
+      "lineitem.l_partkey",
+      "lineitem.l_suppkey"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于外键链路生成，优先沿自然 join 路径构造 workload。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_join_orders_lineitem_partsupp",
+    "path_name": "orders -> lineitem -> partsupp",
+    "allowed_tables": [
+      "orders",
+      "lineitem",
+      "partsupp"
+    ],
+    "allowed_join_paths": [
+      [
+        "lineitem",
+        "orders"
+      ],
+      [
+        "lineitem",
+        "partsupp"
+      ]
+    ],
+    "primary_tables": [
+      "orders"
+    ],
+    "secondary_tables": [
+      "lineitem",
+      "partsupp"
+    ],
+    "from_mode": "join",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "orders.o_orderkey",
+      "orders.o_custkey",
+      "orders.o_orderstatus",
+      "orders.o_totalprice"
+    ],
+    "preferred_group_columns": [
+      "orders.o_orderstatus",
+      "orders.o_orderdate",
+      "orders.o_orderpriority"
+    ],
+    "preferred_order_columns": [
+      "orders.o_orderkey",
+      "orders.o_custkey",
+      "orders.o_orderstatus"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于外键链路生成，优先沿自然 join 路径构造 workload。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_join_lineitem_partsupp_supplier",
+    "path_name": "lineitem -> partsupp -> supplier",
+    "allowed_tables": [
+      "lineitem",
+      "partsupp",
+      "supplier"
+    ],
+    "allowed_join_paths": [
+      [
+        "lineitem",
+        "partsupp"
+      ],
+      [
+        "partsupp",
+        "supplier"
+      ]
+    ],
+    "primary_tables": [
+      "lineitem"
+    ],
+    "secondary_tables": [
+      "partsupp",
+      "supplier"
+    ],
+    "from_mode": "join",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "lineitem.l_orderkey",
+      "lineitem.l_partkey",
+      "lineitem.l_suppkey",
+      "lineitem.l_linenumber"
+    ],
+    "preferred_group_columns": [
+      "lineitem.l_returnflag",
+      "lineitem.l_linestatus",
+      "lineitem.l_shipdate"
+    ],
+    "preferred_order_columns": [
+      "lineitem.l_orderkey",
+      "lineitem.l_partkey",
+      "lineitem.l_suppkey"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于外键链路生成，优先沿自然 join 路径构造 workload。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  },
+  {
+    "path_id": "path_join_lineitem_partsupp_part",
+    "path_name": "lineitem -> partsupp -> part",
+    "allowed_tables": [
+      "lineitem",
+      "partsupp",
+      "part"
+    ],
+    "allowed_join_paths": [
+      [
+        "lineitem",
+        "partsupp"
+      ],
+      [
+        "part",
+        "partsupp"
+      ]
+    ],
+    "primary_tables": [
+      "lineitem"
+    ],
+    "secondary_tables": [
+      "partsupp",
+      "part"
+    ],
+    "from_mode": "join",
+    "required_predicate": false,
+    "allowed_clauses": [
+      "where",
+      "order_by",
+      "group_by",
+      "having"
+    ],
+    "preferred_predicate_columns": [
+      "lineitem.l_orderkey",
+      "lineitem.l_partkey",
+      "lineitem.l_suppkey",
+      "lineitem.l_linenumber"
+    ],
+    "preferred_group_columns": [
+      "lineitem.l_returnflag",
+      "lineitem.l_linestatus",
+      "lineitem.l_shipdate"
+    ],
+    "preferred_order_columns": [
+      "lineitem.l_orderkey",
+      "lineitem.l_partkey",
+      "lineitem.l_suppkey"
+    ],
+    "allow_aggregate": true,
+    "path_reason": "基于外键链路生成，优先沿自然 join 路径构造 workload。",
+    "probe_sql": "",
+    "probe_runtime_seconds": -1.0
+  }
+]

@@ -1,0 +1,7 @@
+FOB       
+REG AIR   
+TRUCK     
+AIR       
+MAIL      
+SHIP      
+RAIL      
